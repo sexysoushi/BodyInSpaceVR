@@ -1,1 +1,0 @@
-Warning: Infinite light range reduced to 1000 [ (line 0)]
