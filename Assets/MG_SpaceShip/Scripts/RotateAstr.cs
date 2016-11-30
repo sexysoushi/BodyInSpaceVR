@@ -14,7 +14,7 @@ public class RotateAstr : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        this.transform.Rotate(Vector3.one * 7.0f * Time.deltaTime, Space.World);
+		this.transform.Rotate(Vector3.forward * 2.0f * Time.deltaTime);
  
 	}
 }
