@@ -3,6 +3,7 @@ using System.Collections;
 
 public class EasyController : MonoBehaviour {
 
+	public GameObject f;
 	private SteamVR_TrackedController device;
 	// Use this for initialization
 	void Start () {
@@ -12,6 +13,7 @@ public class EasyController : MonoBehaviour {
 
 	void Device_TriggerClicked (object sender, ClickedEventArgs e)
 	{
+		f.SetActive (true);
 		Debug.Log ("trigger has been pre");
 	}
 	

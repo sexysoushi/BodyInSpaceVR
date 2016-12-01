@@ -15,6 +15,7 @@ public class PlanetTrigger : MonoBehaviour {
 		isInside = true;
 
 		Debug.Log ("touchey Doody!!!!");
+		Application.LoadLevel ("Simon");
 		if(Input.GetKeyDown(KeyCode.A))
 		{
 			Application.LoadLevel ("Doodle");
@@ -26,6 +27,7 @@ public class PlanetTrigger : MonoBehaviour {
 		isInside = false;
 
 		Debug.Log ("touchey Doody!!!!");
+		Application.LoadLevel ("Simon");
 		if(Input.GetKeyDown(KeyCode.A))
 		{
 			Application.LoadLevel ("Doodle");
