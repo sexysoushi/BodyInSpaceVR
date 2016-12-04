@@ -60,7 +60,6 @@ public class VRManagerScript : MonoBehaviour
     // Exposed parameters:
     public string ConfigFile = "c:\\config.vrx";
     public GameObject VRSystemCenterNode = null;
-    public GameObject TemplateCamera     = null;
 
     public bool ShowWand = true;
 
@@ -151,8 +150,7 @@ public class VRManagerScript : MonoBehaviour
             _EnableFPSDisplay(value);
         }
     }
-
-    public bool              DisableExistingCameras      = true;
+		
     public bool              GrabExistingNodes           = false;
     public bool              DebugNodes                  = false;
     public bool              DebugScreens                = false;
@@ -223,14 +221,6 @@ public class VRManagerScript : MonoBehaviour
     {
         mouseButtons[0] = mouseButtons[1] = mouseButtons[2] = false;
 
-        if (m_displayLog)
-        {
-            GameObject gui = new GameObject();
-            m_GUI = gui.AddComponent<GUIText>() as GUIText;
-            gui.transform.localPosition = new UnityEngine.Vector3(0.5f, 0.0f, 0.0f);
-            m_GUI.pixelOffset = new UnityEngine.Vector2(15, 0);
-            m_GUI.anchor = TextAnchor.LowerCenter;
-        }
 
         MVRTools.IsEditor = Application.isEditor;
 
@@ -267,20 +257,6 @@ public class VRManagerScript : MonoBehaviour
 
         DumpOptions();
 
-        if (!m_isInit)
-        {
-            GameObject gui = new GameObject();
-            m_GUI = gui.AddComponent<GUIText>() as GUIText;
-            gui.transform.localPosition = new UnityEngine.Vector3(0.2f, 0.0f, 0.0f);
-            m_GUI.pixelOffset = new UnityEngine.Vector2(0, 0);
-            m_GUI.anchor = TextAnchor.LowerLeft;
-
-            string txt = m_Kernel.GetLogString(true);
-            print(txt);
-            m_GUI.text = txt;
-
-            return;
-        }
 
         m_Kernel = MiddleVR.VRKernel;
         m_DeviceMgr = MiddleVR.VRDeviceMgr;
@@ -291,23 +267,9 @@ public class VRManagerScript : MonoBehaviour
         {
             SetupSimpleCluster();
         }
+			
 
-        if (DisableExistingCameras)
-        {
-            Camera[] cameras = GameObject.FindObjectsOfType(typeof(Camera)) as Camera[];
-
-            foreach (Camera cam in cameras)
-            {
-                if (cam.targetTexture == null)
-                {
-                    cam.enabled = false;
-                }
-            }
-        }
-
-        MVRNodesCreator.Instance.CreateNodes(VRSystemCenterNode, DebugNodes, DebugScreens, GrabExistingNodes, TemplateCamera);
-
-        MVRTools.CreateViewportsAndCameras(DontChangeWindowGeometry, true);
+        MVRNodesCreator.Instance.CreateNodes(VRSystemCenterNode, DebugNodes, DebugScreens, GrabExistingNodes);
 
         MVRTools.Log(4, "[<] End of VR initialization script");
     }
@@ -333,9 +295,9 @@ public class VRManagerScript : MonoBehaviour
         m_Kernel.DeleteLateObjects();
 
         // Reset Manager's position so text display is correct.
-        transform.position = new UnityEngine.Vector3(0, 0, 0);
-        transform.rotation = new Quaternion();
-        transform.localScale = new UnityEngine.Vector3(1, 1, 1);
+       // transform.position = new UnityEngine.Vector3(0, 0, 0);
+        //transform.rotation = new Quaternion();
+      //  transform.localScale = new UnityEngine.Vector3(1, 1, 1);
 
         m_Wand = GameObject.Find("VRWand");
 
@@ -433,49 +395,7 @@ public class VRManagerScript : MonoBehaviour
 
     }
 
-    private void _SetNavigation(ENavigation iNavigation)
-    {
-        Navigation = iNavigation;
-
-        VRInteractionNavigationWandJoystick navigationWandJoystick = m_Wand.GetComponent<VRInteractionNavigationWandJoystick>();
-        VRInteractionNavigationElastic      navigationElastic      = m_Wand.GetComponent<VRInteractionNavigationElastic>();
-        VRInteractionNavigationGrabWorld    navigationGrabWorld    = m_Wand.GetComponent<VRInteractionNavigationGrabWorld>();
-        if (navigationWandJoystick == null || navigationElastic == null || navigationGrabWorld == null)
-        {
-            MVRTools.Log(2, "[~] Some navigation scripts are missing on the Wand.");
-            return;
-        }
-
-        if (navigationWandJoystick.GetInteraction() == null || navigationElastic.GetInteraction() == null || navigationGrabWorld.GetInteraction() == null)
-        {
-            MVRTools.Log(2, "[~] Some navigation interactions are not initialized.");
-            return;
-        }
-
-        switch (Navigation)
-        {
-            case ENavigation.None:
-                MiddleVR.VRInteractionMgr.Deactivate(navigationWandJoystick.GetInteraction());
-                MiddleVR.VRInteractionMgr.Deactivate(navigationElastic.GetInteraction());
-                MiddleVR.VRInteractionMgr.Deactivate(navigationGrabWorld.GetInteraction());
-                break;
-
-            case ENavigation.Joystick:
-                MiddleVR.VRInteractionMgr.Activate(navigationWandJoystick.GetInteraction());
-                break;
-
-            case ENavigation.Elastic:
-                MiddleVR.VRInteractionMgr.Activate(navigationElastic.GetInteraction());
-                break;
-
-            case ENavigation.GrabWorld:
-                MiddleVR.VRInteractionMgr.Activate(navigationGrabWorld.GetInteraction());
-                break;
-
-            default:
-                break;
-        }
-    }
+   
 
     private void _SetManipulation(EManipulation iManpulation)
     {
@@ -669,7 +589,7 @@ public class VRManagerScript : MonoBehaviour
         // Initialize interactions
         if( !m_InteractionsInitialized )
         {
-            _SetNavigation(Navigation);
+            
             _SetManipulation(Manipulation);
             _SetVirtualHandMapping(VirtualHandMapping);
 
@@ -729,7 +649,7 @@ public class VRManagerScript : MonoBehaviour
 
             nodesMapper.UpdateNodesMiddleVRToUnity(false);
 
-            MVRTools.UpdateCameraProperties();
+
 
             if (m_displayLog)
             {
@@ -791,7 +711,7 @@ public class VRManagerScript : MonoBehaviour
                 MVRTools.Log(3,"[ ] Graphic quality forced, reset Unity Manager.");
                 MVRTools.VRReset();
 
-                MVRTools.CreateViewportsAndCameras(DontChangeWindowGeometry, true);
+
                 m_isGeometrySet = false;
                 m_NeedDelayedRenderingReset = false;
             }
@@ -841,10 +761,10 @@ public class VRManagerScript : MonoBehaviour
         MVRTools.Log(3, "[ ] Dumping VRManager's options:");
         MVRTools.Log(3, "[ ] - Config File : " + ConfigFile);
         MVRTools.Log(3, "[ ] - System Center Node : " + VRSystemCenterNode);
-        MVRTools.Log(3, "[ ] - Template Camera : " + TemplateCamera);
+
         MVRTools.Log(3, "[ ] - Show Wand : " + ShowWand);
         MVRTools.Log(3, "[ ] - Show FPS  : " + ShowFPS);
-        MVRTools.Log(3, "[ ] - Disable Existing Cameras : " + DisableExistingCameras);
+
         MVRTools.Log(3, "[ ] - Grab Existing Nodes : " + GrabExistingNodes);
         MVRTools.Log(3, "[ ] - Debug Nodes : " + DebugNodes);
         MVRTools.Log(3, "[ ] - Debug Screens : " + DebugScreens);
