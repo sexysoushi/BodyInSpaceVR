@@ -1,0 +1,176 @@
+fileFormatVersion: 2
+guid: 73de8154dc6ba9649b76682df6398d58
+timeCreated: 1481279899
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: 01
+    100002: Body_Left
+    100004: Body_Right
+    100006: Body_Trim
+    100008: Box
+    100010: Box1
+    100012: Camera_Perspective1
+    100014: Cylinder
+    100016: group
+    100018: Main
+    100020: Plane
+    100022: Sphere
+    100024: Sphere1
+    100026: Sphere2
+    100028: Torus
+    100030: //RootNode
+    100032: V-Ray Area Light
+    100034: V-Ray Dome
+    100036: V-Ray Dome1
+    100038: Wheel_Exterior_Left
+    100040: Wheel_Exterior_Right
+    100042: Wheel_Front_Separator
+    100044: Wheel_Interior_Left
+    100046: Wheel_Interior_Right
+    100048: Wheel_Rim
+    400000: 01
+    400002: Body_Left
+    400004: Body_Right
+    400006: Body_Trim
+    400008: Box
+    400010: Box1
+    400012: Camera_Perspective1
+    400014: Cylinder
+    400016: group
+    400018: Main
+    400020: Plane
+    400022: Sphere
+    400024: Sphere1
+    400026: Sphere2
+    400028: Torus
+    400030: //RootNode
+    400032: V-Ray Area Light
+    400034: V-Ray Dome
+    400036: V-Ray Dome1
+    400038: Wheel_Exterior_Left
+    400040: Wheel_Exterior_Right
+    400042: Wheel_Front_Separator
+    400044: Wheel_Interior_Left
+    400046: Wheel_Interior_Right
+    400048: Wheel_Rim
+    2300000: 01
+    2300002: Body_Left
+    2300004: Body_Right
+    2300006: Body_Trim
+    2300008: Box
+    2300010: Box1
+    2300012: Cylinder
+    2300014: Plane
+    2300016: Sphere
+    2300018: Sphere1
+    2300020: Sphere2
+    2300022: Torus
+    2300024: Wheel_Exterior_Left
+    2300026: Wheel_Exterior_Right
+    2300028: Wheel_Front_Separator
+    2300030: Wheel_Interior_Left
+    2300032: Wheel_Interior_Right
+    2300034: Wheel_Rim
+    3300000: 01
+    3300002: Body_Left
+    3300004: Body_Right
+    3300006: Body_Trim
+    3300008: Box
+    3300010: Box1
+    3300012: Cylinder
+    3300014: Plane
+    3300016: Sphere
+    3300018: Sphere1
+    3300020: Sphere2
+    3300022: Torus
+    3300024: Wheel_Exterior_Left
+    3300026: Wheel_Exterior_Right
+    3300028: Wheel_Front_Separator
+    3300030: Wheel_Interior_Left
+    3300032: Wheel_Interior_Right
+    3300034: Wheel_Rim
+    4300000: Cylinder
+    4300002: 01
+    4300004: Torus
+    4300006: Box
+    4300008: Sphere1
+    4300010: Box1
+    4300012: Plane
+    4300014: Sphere2
+    4300016: Sphere
+    4300018: Wheel_Front_Separator
+    4300020: Wheel_Exterior_Right
+    4300022: Wheel_Exterior_Left
+    4300024: Body_Left
+    4300026: Body_Trim
+    4300028: Body_Right
+    4300030: Wheel_Rim
+    4300032: Wheel_Interior_Right
+    4300034: Wheel_Interior_Left
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
