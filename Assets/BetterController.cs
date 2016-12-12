@@ -8,65 +8,50 @@ public class BetterController : MonoBehaviour {
 	private SteamVR_TrackedObject trackedObject;
 	private SteamVR_Controller.Device device;
 
-	private GameObject pickup;
-
+	private bool pickupFlag = false;
+	public const bool triggerButtonOn = false;
 	public GameObject flag;
-	public GameObject flagBefore;
-	public GameObject flagAfter;
+	private Transform posFlagInit;
 
-	public Transform posFlagInit;
+	private AudioSource audio;
 
 	// Use this for initialization
 	void Start () {
 		trackedObject = GetComponent<SteamVR_TrackedObject> ();
-	}
+		posFlagInit = flag.transform;
 
+		audio = GetComponent<AudioSource> ();
+		audio.Stop ();
+	}
 
 	private void OnTriggerEnter(Collider c)
 	{
 		Debug.Log ("TOUCH flag");
-		pickup = c.gameObject;
+		audio.Play ();
 	}
 
 	private void OnTriggerStay(Collider c)
 	{
-		pickup = c.gameObject;
-		if(device.GetPressDown (gripButton)) {
+		if(device.GetPressDown (gripButton) && c.gameObject == flag) {
 			//flag.transform.parent = device.transform;
 			Debug.Log ("GRIP pressed and touch flag");
-			pickup.gameObject.GetComponent<Rigidbody> ().useGravity = false;
-			pickup.transform.parent.localPosition = new Vector3 (device.transform.pos.x, device.transform.pos.y, device.transform.pos.z);
-		}
-		else if(device.GetPressUp (gripButton)){
-			pickup.gameObject.GetComponent<Rigidbody> ().useGravity = true;
-			pickup = null;
-			Destroy (c.gameObject);
-			//Instantiate ();
+			pickupFlag = true;
+			c.gameObject.transform.parent.localPosition = new Vector3 (device.transform.pos.x, device.transform.pos.y - 10.0f, device.transform.pos.z);
 		}
 	}
-
-	private void OnTriggerExit(Collider c)
-	{
-		//pickup = null;
-	}
-
-
-
+		
 	// Update is called once per frame
 	void Update () {
-	
-		device = SteamVR_Controller.Input((int)trackedObject.index);
-		if (device.GetAxis().x != 0 || device.GetAxis().y != 0) {
-			//Debug.Log (device.GetAxis().x + " " + device.GetAxis().y);
-		}
-		if(device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger))
-		{
-			//Debug.Log ("Trigger pressed");
-			device.TriggerHapticPulse (700);
+		
+		if (device.GetPressUp (gripButton) && pickupFlag) {
+			flag.transform.position = posFlagInit.position;
+			pickupFlag = false;
 		}
 
-
-
-
+		if (device.GetPressDown (triggerButton)) {
+			//triggerButtonOn = true;
+		} else {
+			//triggerButtonOn = false;
+		}
 	}
 }

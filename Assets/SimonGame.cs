@@ -33,9 +33,14 @@ public class SimonGame : MonoBehaviour {
 	bool _s8 = false;
 	bool _s9 = false;
 
+	private AudioSource audiosource;
+	public AudioClip lose;
+	public AudioClip win;
 
 	// Use this for initialization
 	void Awake () {
+
+		audiosource = GetComponent<AudioSource>();
 
 		jp1.SetActive (false);
 		jp2.SetActive (false);
@@ -60,6 +65,15 @@ public class SimonGame : MonoBehaviour {
 		}
 
 		SimonSequence1();
+	}
+
+	void YouLose()
+	{
+		audiosource.PlayOneShot (lose);
+	}
+	void YouWin()
+	{
+		audiosource.PlayOneShot (win);
 	}
 
 	void SimonSequence1()

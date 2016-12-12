@@ -6,18 +6,19 @@ using System.Collections.Generic;
 public class MeteoriteManager : MonoBehaviour {
 
 	public Text countText;
-	float countDown = 500.0f;
+	float countDown = 100.0f;
 	bool activeTransY = false;
 
 	public List<GameObject> meteoritList = new List<GameObject>();
 	private GameObject lastGate;
 
 	//public const float vitesseAstronaut = 0.01f; //temp
-	float vitesseAstro = 0.05f;
+	float vitesseAstro = 0.1f;
 	float limitVitesseMax = 1f;
 	float limitVitesseMin = 0.1f;
 
 	float countSpawn = 0.0f;
+
 
 	// Use this for initialization
 	void Start () {
@@ -53,12 +54,12 @@ public class MeteoriteManager : MonoBehaviour {
 		{
 			countDown--;
 		}
-		if(countDown <= 325.0f && countDown > 175.0f)
+		if(countDown <= 70.0f && countDown > 30.0f)
 		{
 			countText.text = "2";
 			countDown--;
 		}
-		if(countDown <= 175.0f && countDown >= 0.0f)
+		if(countDown <= 30.0f && countDown >= 0.0f)
 		{
 			countText.text = "1";
 			countDown--;

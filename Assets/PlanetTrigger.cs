@@ -3,37 +3,36 @@ using System.Collections;
 
 public class PlanetTrigger : MonoBehaviour {
 
-	bool isInside = false;
+	public GameObject descriptionSimon;
+	public GameObject descriptionDoodle;
 
 	// Use this for initialization
 	void Start () {
-	
+		descriptionSimon.SetActive(false);
+		descriptionDoodle.SetActive(false);
 	}
 
-	void OnTriggerEnter(Collider c) {
-		
-		isInside = true;
+	void OnTriggerStay(Collider c) {
 
-		Debug.Log ("touchey Doody!!!!");
-		Application.LoadLevel ("Simon");
-		if(Input.GetKeyDown(KeyCode.A))
-		{
-			Application.LoadLevel ("Doodle");
+		if (c.gameObject.tag == "Simon") {
+			descriptionSimon.SetActive (true);
+			if (BetterController.triggerButtonOn) {
+				Application.LoadLevel ("Simon");
+			}
+		} else {
+			descriptionSimon.SetActive(false);
+		}
+
+		if (c.gameObject.tag == "Doodle") {
+			descriptionDoodle.SetActive (true);
+			if (BetterController.triggerButtonOn) {
+				Application.LoadLevel ("Doodle");
+			}
+		} else {
+			descriptionDoodle.SetActive(false);
 		}
 	}
 
-	void OnTriggerExit(Collider c) {
-
-		isInside = false;
-
-		Debug.Log ("touchey Doody!!!!");
-		Application.LoadLevel ("Simon");
-		if(Input.GetKeyDown(KeyCode.A))
-		{
-			Application.LoadLevel ("Doodle");
-		}
-	}
-	
 	// Update is called once per frame
 	void Update () {
 	
