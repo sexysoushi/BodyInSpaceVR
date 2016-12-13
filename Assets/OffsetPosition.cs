@@ -36,8 +36,9 @@ T_.Add(Instantiate<GameObject>(T_1[i]));
 void Update () {
 
 Vector3 offset = new Vector3(tete.transform.position.x - vive.transform.position.x, tete.transform.position.y - vive.transform.position.y, tete.transform.position.z - vive.transform.position.z);
-Vector3 offsetTete = new Vector3 (-0.2f, -0.05f, 0.05f);
-		offset = offset + offsetTete;
+//Vector3 offsetTete = new Vector3 (-0.2f, -0.05f, 0.05f);
+Vector3 offsetTete = new Vector3(-0.2f, 0.1f, 0);
+offset = offset + offsetTete;
 for (int i = 0; i < nodeKinectList.Count; i++)
 {
 nodeModelList[i].transform.position = nodeKinectList[i].transform.position - offset;

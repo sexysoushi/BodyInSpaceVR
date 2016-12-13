@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -9,6 +10,8 @@ public class SimonGame : MonoBehaviour {
 	public GameObject jp3;
 	public GameObject jp4;
 	public GameObject jp5;
+
+    public Text progression;
 
 	public GameObject alienPos1; // bras different
 	public GameObject alienPos2; // jambes écarté
@@ -32,8 +35,10 @@ public class SimonGame : MonoBehaviour {
 	public AudioClip win;
 
 	// Use this for initialization
-	void Awake () {
-
+	void Start () {
+       // progression = GetComponent<Text>();
+        progression.text = "0/1";
+        Debug.Log(progression);
 		audiosource = GetComponent<AudioSource>();
 		i = 0;
 		j = 0;
@@ -87,9 +92,8 @@ public class SimonGame : MonoBehaviour {
 				search = true;
 				//son lose + jauge descent
 			} else {
-			//continu
-
-				Debug.Log ("BONNE POSITION");
+                //continu
+                Debug.Log ("BONNE POSITION");
 				if (i == 9 && j == 9) {
 					//win GAME
 				}
@@ -109,8 +113,9 @@ public class SimonGame : MonoBehaviour {
 					//gling son
 				}
 			}
-			numPos = -1;	
-		}
+			numPos = -1;
+            progression.text = (j).ToString() + "/" + (i+1).ToString();
+        }
 
 	}
 

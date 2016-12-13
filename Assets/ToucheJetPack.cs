@@ -19,20 +19,14 @@ public class ToucheJetPack : MonoBehaviour {
 	public static float distanceInit;
 	public static float comp;
 
-	// Use this for initialization
-	void Start () {
-		trackedObject = GetComponent<SteamVR_TrackedObject> ();
-		world.SetActive (false);
+    // Use this for initialization
+    void Start() {
+        trackedObject = GetComponent<SteamVR_TrackedObject>();
+        world.SetActive(false);
+      
 	}
 
-	private void OnTriggerEnter(Collider c)
-	{
-		if(c.gameObject.tag == "jetpack")
-		{
-			Application.LoadLevel ("DoodleStart");
-		}
-			
-	}
+
 
 	void Update () {
 

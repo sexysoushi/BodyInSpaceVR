@@ -13,28 +13,32 @@ public class PlanetTrigger : MonoBehaviour {
 	}
 
 	void OnTriggerStay(Collider c) {
-
+        //Debug.Log("trigger planet");
 		if (c.gameObject.tag == "Simon") {
 			descriptionSimon.SetActive (true);
-			if (BetterController.triggerButtonOn) {
+            Debug.Log("trigger SIMON planet");
+            if (BetterController.padButtonOn) {
+                Debug.Log("TouchePad pressed for Simon");
 				Application.LoadLevel ("Simon");
 			}
-		} else {
-			descriptionSimon.SetActive(false);
-		}
+		} 
 
 		if (c.gameObject.tag == "Doodle") {
 			descriptionDoodle.SetActive (true);
-			if (BetterController.triggerButtonOn) {
+			if (BetterController.padButtonOn) {
 				Application.LoadLevel ("Doodle");
 			}
-		} else {
-			descriptionDoodle.SetActive(false);
-		}
+		} 
 	}
 
-	// Update is called once per frame
-	void Update () {
+    void OnTriggerExit(Collider c)
+    {
+        descriptionSimon.SetActive(false);
+        descriptionDoodle.SetActive(false);
+    }
+
+        // Update is called once per frame
+        void Update () {
 	
 	}
 }
