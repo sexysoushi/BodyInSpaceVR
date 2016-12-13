@@ -74,7 +74,7 @@ public class MeteoriteManager : MonoBehaviour {
 
 		if(activeTransY)
 		{
-			this.transform.position = new Vector3 (this.transform.position.x, this.transform.position.y - vitesseAstro, this.transform.position.z);
+			//this.transform.position = new Vector3 (this.transform.position.x, this.transform.position.y - vitesseAstro, this.transform.position.z);
 			countSpawn++;
 
 			if(countSpawn >= 700.0f)

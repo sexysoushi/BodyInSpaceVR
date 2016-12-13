@@ -10,28 +10,22 @@ public class SimonGame : MonoBehaviour {
 	public GameObject jp4;
 	public GameObject jp5;
 
-	public GameObject alienPos1;
-	public GameObject alienPos2;
-	public GameObject alienPos3;
-	public GameObject alienPos4;
+	public GameObject alienPos1; // bras different
+	public GameObject alienPos2; // jambes écarté
+	public GameObject alienPos3; // dab
+	public GameObject alienPos4; // bras en l'air
+
+	public static bool search = false;
+	public static int numPos = -1;
 
 	private List<GameObject> alienPosList = new List<GameObject>();
-	private List<GameObject> simonSequenceList = new List<GameObject>();
+	private List<int> simonSequenceList = new List<int>();
 
 	bool astroPos1Correct = false;
 	bool astroPos2Correct = false;
 	bool astroPos3Correct = false;
 	bool astroPos4Correct = false;
-
-	bool _s1 = false;
-	bool _s2 = false;
-	bool _s3 = false;
-	bool _s4 = false;
-	bool _s5 = false;
-	bool _s6 = false;
-	bool _s7 = false;
-	bool _s8 = false;
-	bool _s9 = false;
+	int i,j;
 
 	private AudioSource audiosource;
 	public AudioClip lose;
@@ -41,7 +35,8 @@ public class SimonGame : MonoBehaviour {
 	void Awake () {
 
 		audiosource = GetComponent<AudioSource>();
-
+		i = 0;
+		j = 0;
 		jp1.SetActive (false);
 		jp2.SetActive (false);
 		jp3.SetActive (false);
@@ -59,12 +54,13 @@ public class SimonGame : MonoBehaviour {
 		}
 
 		//initialisation sequence Simon
-		for(int i = 0; i < 10; i++)
+		for(int k = 0;k < 10; k++)
 		{
-			simonSequenceList.Add(alienPosList[(Random.Range(0, alienPosList.Count))]);
+
+			simonSequenceList.Add(Random.Range(0, 4000)/1000);
 		}
 
-		SimonSequence1();
+
 	}
 
 	void YouLose()
@@ -76,72 +72,45 @@ public class SimonGame : MonoBehaviour {
 		audiosource.PlayOneShot (win);
 	}
 
-	void SimonSequence1()
+	void SimonSequence()
 	{
-		simonSequenceList [0].SetActive (true);
+		
+		if (!search && numPos ==-1) {
 
-	}
+			alienPosList[simonSequenceList[i]].SetActive(true);
+					search = true;
+			}
+		if (!search && numPos != -1) {
+			
+			if (numPos != simonSequenceList [j]) {
+				Debug.Log ("BAD POSITION ! Voulu " + simonSequenceList [j] + " capté " + numPos);
+				search = true;
+				//son lose + jauge descent
+			} else {
+			//continu
 
-	void SimonSequence2()
-	{
-		simonSequenceList [0].SetActive (false);
-		simonSequenceList [1].SetActive (true);
+				Debug.Log ("BONNE POSITION");
+				if (i == 9 && j == 9) {
+					//win GAME
+				}
+				else if (i == j) {
+					alienPosList[simonSequenceList[i]].SetActive(false);
+					i++;
+					j = 0;
+					alienPosList[simonSequenceList[i]].SetActive(true);
+					search = true;
+					// son applause sequence suivante
+				}
+				else if(i > j)
+				{
+					j++;
+					search = true;
 
-	}
-
-	void SimonSequence3()
-	{
-		simonSequenceList [1].SetActive (false);
-		simonSequenceList [2].SetActive (true);
-
-	}
-
-	void SimonSequence4()
-	{
-		simonSequenceList [2].SetActive (false);
-		simonSequenceList [3].SetActive (true);
-
-	}
-
-	void SimonSequence5()
-	{
-		simonSequenceList [3].SetActive (false);
-		simonSequenceList [4].SetActive (true);
-
-	}
-
-	void SimonSequence6()
-	{
-
-		simonSequenceList [4].SetActive (false);
-		simonSequenceList [5].SetActive (true);
-	}
-
-	void SimonSequence7()
-	{
-
-		simonSequenceList [5].SetActive (false);
-		simonSequenceList [6].SetActive (true);
-	}
-
-	void SimonSequence8()
-	{
-		simonSequenceList [6].SetActive (false);
-		simonSequenceList [7].SetActive (true);
-
-	}
-
-	void SimonSequence9()
-	{
-
-		simonSequenceList [7].SetActive (false);
-		simonSequenceList [8].SetActive (true);
-	}
-
-	void SimonSequence10()
-	{
-		simonSequenceList [8].SetActive (false);
-		simonSequenceList [9].SetActive (true);
+					//gling son
+				}
+			}
+			numPos = -1;	
+		}
 
 	}
 
@@ -149,51 +118,7 @@ public class SimonGame : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if(_s1)
-		{
-			SimonSequence2 ();
-		}
-
-		if(_s2)
-		{
-			SimonSequence3 ();
-		}
-
-		if(_s3)
-		{
-			SimonSequence4 ();
-		}
-
-		if(_s4)
-		{
-			SimonSequence5 ();
-		}
-
-		if(_s5)
-		{
-			SimonSequence6 ();
-		}
-
-		if(_s6)
-		{
-			SimonSequence7 ();
-		}
-
-		if(_s7)
-		{
-			SimonSequence8 ();
-		}
-
-		if(_s8)
-		{
-			SimonSequence9 ();
-		}
-
-		if(_s9)
-		{
-			SimonSequence10 ();
-		}
-
+		SimonSequence ();
 
 	}
 }
