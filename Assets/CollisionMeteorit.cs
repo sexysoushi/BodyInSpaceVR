@@ -10,6 +10,7 @@ public class CollisionMeteorit : MonoBehaviour {
 
 	void OnCollisionEnter(Collision c)
 	{
+		//Debug.Log ("Collision ollision");
 		if(c.gameObject.tag == "meteorite")
 		{
 			Debug.Log ("Meteorit collision");

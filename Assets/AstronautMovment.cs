@@ -28,7 +28,6 @@ public class AstronautMovment : MonoBehaviour {
 			coeff = 36 - Mathf.Abs (currAngle);
 			if(currAngle<0)
 			{
-
 				this.transform.position = new Vector3 (this.transform.position.x, this.transform.position.y, this.transform.position.z - (0.01f*coeff));
 			}
 			else

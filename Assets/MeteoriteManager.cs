@@ -29,7 +29,7 @@ public class MeteoriteManager : MonoBehaviour {
 	void SpawnMeteorite(Transform lastGatePos)
 	{
 		int i = Random.Range (0, meteoritList.Count);
-		GameObject gate = (GameObject)Instantiate (meteoritList[i], new Vector3(lastGatePos.position.x, lastGatePos.position.y + 50.0f, lastGatePos.position.z), Quaternion.identity);
+		GameObject gate = (GameObject)Instantiate (meteoritList[i], new Vector3(lastGatePos.position.x - 50.0f, lastGatePos.position.y, lastGatePos.position.z), meteoritList[i].transform.rotation);
 		gate.transform.parent = this.transform;
 	}
 
@@ -74,7 +74,7 @@ public class MeteoriteManager : MonoBehaviour {
 
 		if(activeTransY)
 		{
-			this.transform.position = new Vector3 (this.transform.position.x, this.transform.position.y - vitesseAstro, this.transform.position.z);
+			this.transform.position = new Vector3 (this.transform.position.x + vitesseAstro, this.transform.position.y, this.transform.position.z);
 			countSpawn++;
 
 			if(countSpawn >= 700.0f)
